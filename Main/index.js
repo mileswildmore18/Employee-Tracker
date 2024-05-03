@@ -1,49 +1,84 @@
-const express = require('express');
-// Import and require Pool
-const {Pool} = require('pg');
+const { prompt } = require("inquirer");
+const logo = require("asciiart-logo");
+const db = require("./db");
+const trackerChoices = ['View All Employees', 'Add Employee', 'Update Employee Role, View All Roles', 'Add Role', 'View All Departments', 'Add Department',
+    'Update Employee Role', 'Update Employee Manager', 'View Employee Manager', 'View Employee Department',
+    'Remove Employee', 'Remove Role', 'Remove Department', 'View Budget', 'Quit']
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+init();
 
-//Express middleware
-app.use(express.urlencoded({extended: false }));
-app.use(express.json());
+//Display logo text, load main prompts
+function init() {
+    const logoText = logo({ name: "Employee Tracker" }).render();
 
-//Connect to the database
-const pool = new Pool(
-    {
-        // Enter PostgreSQL username
-        user: 'postgres',
-        // Enter PostgreSQL password
-        password:'rootroot',
-        host: 'localhost',
-        database: 'employee_db'
- 
-   },
-   console.log('Connected to the employee_db database!')
-)
+    console.log(logoText);
 
-pool.connect();
+    loadMainPrompts();
+}
 
-// Hardcoded query: DELETE FROM course_names WHERE id = 3;
-pool.query(`DELETE FROM employees WHERE id = $1`, [3], (err, {rows}) => {
-    if (err) {
-      console.log(err);
+function loadMainPrompts() {
+    prompt([
+        {
+            type: 'list',
+            name: 'employeetrack',
+            message: 'What would you like to do?',
+            choices: trackerChoices,
+        }
+    ]).then((res) => {
+        let userChoice;
+        switch (res.trackerChoices) {
+            case 'View All Employees':
+                userChoice = new db.viewAllEmployees()
+                break;
+            case 'Add Employee':
+                userChoice = new db.addEmployee()
+                break;
+            case 'Update Employee Role':
+                userChoice = new db.updateEmployeeRole()
+                break;
+            case 'View All Roles':
+                userChoice = new db.viewAllRoles()
+                break;
+            case 'Add Role':
+                userChoice = new db.addRole()
+                break;
+            case 'View All Departments':
+                userChoice = new db.viewAllDepartments()
+                break;
+            case 'Add Department':
+                userChoice = new db.addDepartment()
+                break;
+            case 'Update Employee Role':
+                userChoice = new db.updateEmployeeRole()
+                break;
+            case 'Update Employee Manager':
+                userChoice = new db.updateEmployeeManager()
+                break;
+            case 'View Employee Manager':
+                userChoice = new db.viewEmployeeManager()
+                break;
+            case 'View Employee Department':
+                userChoice = new db.viewEmployeeDepartment()
+                break;
+            case 'Remove Employee':
+                userChoice = new db.removeEmployees()
+                break;
+            case 'Remove Role':
+                userChoice = new db.removeRole()
+                break;
+            case 'Remove Department':
+                userChoice = new db.removeDepartment()
+                break;
+            case 'View Budget':
+                userChoice = new db.viewBudget()
+                break;
+        }
     }
-    console.log(rows);
-  });
-  
-  // Query database
-  pool.query('SELECT * FROM employees', function (err, {rows}) {
-    console.table(rows);
-  });
-  
-  // Default response for any other request (Not Found)
-  app.use((req, res) => {
-    res.status(404).end();
-  });
-  
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-  
+
+
+    )
+}
+
+function viewEmployees() {
+
+}
