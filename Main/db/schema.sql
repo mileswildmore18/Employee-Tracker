@@ -3,9 +3,12 @@ CREATE DATABASE employee_db;
 
 \c employee_db;
 
-CREATE TABLE departments (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(30) NOT NULL
+CREATE TABLE employee (    
+id: SERIAL PRIMARY KEY
+first_name: VARCHAR(30) NOT NULL 
+last_name: VARCHAR(30) NOT NULL 
+role_id: INTEGER NOT NULL
+manager_id: INTEGER
 );
 
 CREATE TABLE role (
@@ -15,11 +18,10 @@ CREATE TABLE role (
     department_id: INTEGER NOT NULL 
 );
 
-CREATE TABLE employee (
-    
-id: SERIAL PRIMARY KEY
-first_name: VARCHAR(30) NOT NULL 
-last_name: VARCHAR(30) NOT NULL 
-role_id: INTEGER NOT NULL
-manager_id: INTEGER
-)
+
+
+
+CREATE TABLE departments (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(30) NOT NULL
+);
