@@ -50,35 +50,40 @@ function loadMainPrompts() {
                     console.table(department.rows);
                 })
                 break;
-                
-                // case 'Add Employee':
+            
+            case 'View Employee Manager':
+                db.viewEmployeeManager().then((employee)=> {
+                    console.table(employee.rows);
+                })
+                break;
+            
+            // case 'View Employee Department':
+            //     userChoice =  db.viewEmployeeDepartment()
+            
+            // case 'View Budget':
+            //     userChoice =  db.viewBudget()    
+            
+            // case 'Add Employee':
             //     userChoice =  db.addEmployee()
                 
-            // case 'Update Employee Role':
-            //     userChoice =  db.updateEmployeeRole()
-               
-            
                
             // case 'Add Role':
             //     userChoice =  db.addRole()
                
-            
-              
+             
             // case 'Add Department':
             //     userChoice =  db.addDepartment()
-               
+            
+            // case 'Update Employee Role':
+            //     userChoice =  db.updateEmployeeRole()
+                  
             // case 'Update Employee Role':
             //     userChoice =  db.updateEmployeeRole()
                 
             // case 'Update Employee Manager':
             //     userChoice =  db.updateEmployeeManager()
-               
-            // case 'View Employee Manager':
-            //     userChoice =  db.viewEmployeeManager()
-                
-            // case 'View Employee Department':
-            //     userChoice =  db.viewEmployeeDepartment()
-                
+                  
+            
             // case 'Remove Employee':
             //     userChoice =  db.removeEmployees()
                 
@@ -87,8 +92,7 @@ function loadMainPrompts() {
              
             // case 'Remove Department':
             //     userChoice =  db.removeDepartment()
-            // case 'View Budget':
-            //     userChoice =  db.viewBudget()
+            
             // case 'Quit':
             //     userChoice = quit()
                 

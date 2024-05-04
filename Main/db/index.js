@@ -78,7 +78,7 @@ class DB {
 
     viewEmployeeManager() {
         return this.query(
-            "SELECT e.employee_name, m.manager_name FROM employees e JOIN employees m ON e.manager_id = m.employee_id;"
+            "SELECT e.first_name, e.last_name, m.manager_id FROM employees e JOIN employees m ON e.manager_id = m.id;"
         )
     }
 
