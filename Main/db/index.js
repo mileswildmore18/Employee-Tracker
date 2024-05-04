@@ -58,10 +58,10 @@ class DB {
         
     }
 
-    addEmployee() {
+    addEmployee(first_name, last_name, role_id, manager_id) {
         return this.query(
-            "INSERT INTO employees (employee_name, department, position, salary) VALUES ('John Doe', 'Sales', 'Sales Representative', 6);"
-        )
+            "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4);", [first_name, last_name, role_id, manager_id]
+        );
     }
 
     updateEmployeeRole() {
@@ -76,15 +76,15 @@ class DB {
         )
     }
 
-    viewEmployeeManager() {
+    viewEmployeeManager(manager_id) {
         return this.query(
-            "SELECT e.first_name, e.last_name, m.manager_id FROM employees e JOIN employees m ON e.manager_id = m.id;"
+            "SELECT first_name, last_name, manager_id FROM employees WHERE manager_id = $1;",[manager_id]
         )
     }
 
     viewEmployeeDepartment() {
         return this.query(
-            "SELECT employee.name, departments.department_name FROM employees JOIN departments ON employees.department_id = departments.department_id;"
+            "SELECT e.first_name, e.last_name, d.department_name FROM department d JOIN employees e ON d.department_id = department_id ORDER BY d.department_id, e.id;"
         )
     }
 

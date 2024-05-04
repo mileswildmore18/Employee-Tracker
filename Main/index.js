@@ -7,7 +7,7 @@ const trackerChoices = ['View All Employees', 'View All Roles', 'View All Depart
                         'Remove Employee','Remove Role', 'Remove Department',
                         'Quit']
 const role = ['Sales Lead','Salesperson','Lead Engineer','Software Engineer','Account Manager','Acccountant','Legal Team Lead','Lawyer', 'Customer Service',]
-const manager = ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Kunal Singh', 'Malia Brown']
+const manager = ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Singh Kunal', 'Malia Brown', 'Sarah Lourd' ]
 init();
 
 //Display logo text, load main prompts
@@ -52,19 +52,71 @@ function loadMainPrompts() {
                 break;
             
             case 'View Employee Manager':
-                db.viewEmployeeManager().then((employee)=> {
+                db.viewAllEmployees().then(({rows})=> {
+                    const managers = rows.map(({id, first_name, last_name})=>({
+                        name: `${first_name} ${last_name}`,
+                        value: id
+                    }));
+                    prompt([
+                        {type: 'list',
+                         name: 'manager',
+                         message: "Who is the employee's manager?",
+                         choices: managers
+                    }
+                    ]).then((res)=>{
+                        db.viewEmployeeManager(res.manager)
+                        .then(({rows})=>{
+                        console.table(rows)           
+                        })
+                    })
+                })
+                break;
+            
+            case 'View Employee Department':
+                db.viewEmployeeDepartment().then((employee)=> {
                     console.table(employee.rows);
                 })
                 break;
             
-            // case 'View Employee Department':
-            //     userChoice =  db.viewEmployeeDepartment()
-            
             // case 'View Budget':
             //     userChoice =  db.viewBudget()    
             
-            // case 'Add Employee':
-            //     userChoice =  db.addEmployee()
+            case 'Add Employee':
+                
+                    prompt([
+                        { 
+                            type: 'input',
+                            name: 'firstname',
+                            message: "What is the employee's first name?",
+                        },
+                        {
+                            type: 'input',
+                            name: 'lastname',
+                            message: "What is the employee's last name?",
+                        },
+                        {
+                            type: 'list',
+                            name: 'role',
+                            message: "What is the employee's role?",
+                            choices: role,   
+                        },
+                        {
+                            type: 'list',
+                            name: 'manager',
+                            message: "Who is the employee's manager?",
+                            choices: manager,
+                        }
+                    ])
+                    .then((res)=>{
+                        let {firstname, lastname, role, manager} = res;
+                    db.addEmployee(firstname, lastname, role, manager)
+                    .then(()=>{
+                        console.log('Employee has been added');
+                    })
+                    
+                })
+                break;
+            }
                 
                
             // case 'Add Role':
@@ -96,11 +148,21 @@ function loadMainPrompts() {
             // case 'Quit':
             //     userChoice = quit()
                 
-        }
+        })
     }
 
 
-    )
+    
+function mapEmployees(){
+    let managers;
+    db.viewAllEmployees().then(({rows})=> {
+        managers = rows.map(({id, first_name, last_name})=>({
+            name: `${first_name} ${last_name}`,
+            value: id
+        })).then(()=> {
+
+        })
+    })
 }
 
 function viewAllEmployees() {
