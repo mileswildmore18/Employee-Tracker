@@ -15,7 +15,7 @@ function init() {
 
     loadMainPrompts();
 }
-
+//Loads up the prompt for options
 function loadMainPrompts() {
     prompt([
         {
@@ -79,6 +79,66 @@ function loadMainPrompts() {
     )
 }
 
-function viewEmployees() {
+function viewAllEmployees() {
+    const query = 'SELECT * FROM employees'
+    
+    
+    }
 
+
+function viewEmployeeDepartment() {
+
+}
+
+function viewEmployeeManager() {
+
+}
+
+function removeEmployees() {
+
+}
+
+function updateEmployeeRole() {
+
+}
+
+function updateEmployeeManager() {
+
+}
+
+function viewAllRoles() {
+
+}
+
+function addRole() {
+
+}
+
+function removeRole() {
+
+}
+
+function viewAllDepartments() {
+
+}
+
+function addDepartment() {
+
+}
+
+function removeDepartment() {
+
+}
+
+function viewBudget() {
+
+}
+
+function addEmployee() {
+
+}
+//Exit the Application
+function quit() {
+    console.log("Goodbye!");
+    process.exit();
 }

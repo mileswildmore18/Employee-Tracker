@@ -1,3 +1,5 @@
+const pool = require('./connection');
+
 class DB {
     constructor() {}
 
@@ -13,8 +15,8 @@ class DB {
     //Find all employees, join with roles and departments to display their roles, salaries, department and ID
     findAllEmployees() {
         return this.query(
-            "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS departments"    
-        )
+            "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS departments");
+    
     }
     // Find all employees except the given employee id
     findAllEmployeesNoID() {

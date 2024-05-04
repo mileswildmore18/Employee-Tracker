@@ -21,7 +21,7 @@ CREATE TABLE role (
 
 
 
-CREATE TABLE departments (
+CREATE TABLE department (
   id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL
 );
