@@ -82,9 +82,9 @@ class DB {
         )
     }
 
-    viewEmployeeDepartment() {
+    viewEmployeeDepartment(department_id) {
         return this.query(
-            "SELECT e.first_name, e.last_name, d.department_name FROM department d JOIN employees e ON d.department_id = department_id ORDER BY d.department_id, e.id;"
+            "SELECT first_name, last_name, department_name FROM employees JOIN role ON employees.id = role.id JOIN department ON role.department_id = department.department_id WHERE department.department_id = $1;",[department_id]
         )
     }
 

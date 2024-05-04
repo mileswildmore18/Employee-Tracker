@@ -7,7 +7,7 @@ const trackerChoices = ['View All Employees', 'View All Roles', 'View All Depart
                         'Remove Employee','Remove Role', 'Remove Department',
                         'Quit']
 const role = ['Sales Lead','Salesperson','Lead Engineer','Software Engineer','Account Manager','Acccountant','Legal Team Lead','Lawyer', 'Customer Service',]
-const manager = ['None', 'John Doe', 'Mike Chan', 'Ashley Rodriguez', 'Kevin Tupik', 'Singh Kunal', 'Malia Brown', 'Sarah Lourd' ]
+
 init();
 
 //Display logo text, load main prompts
@@ -50,20 +50,25 @@ function loadMainPrompts() {
                     console.table(department.rows);
                 })
                 break;
-            
+            // Pull up the employee manager with choices of people in the company
             case 'View Employee Manager':
                 db.viewAllEmployees().then(({rows})=> {
+                    //take rows back from viewALLEmployee, loops and creates an array of the id, last and first name
                     const managers = rows.map(({id, first_name, last_name})=>({
+                        //setting name and value of the choices
                         name: `${first_name} ${last_name}`,
                         value: id
                     }));
+                    //prompt for user to pick a choice from the managers listed
                     prompt([
                         {type: 'list',
                          name: 'manager',
                          message: "Who is the employee's manager?",
                          choices: managers
                     }
+                    //Loop through employee arrays of managers, setting up the prompt
                     ]).then((res)=>{
+                        //id of manager
                         db.viewEmployeeManager(res.manager)
                         .then(({rows})=>{
                         console.table(rows)           
@@ -73,8 +78,28 @@ function loadMainPrompts() {
                 break;
             
             case 'View Employee Department':
-                db.viewEmployeeDepartment().then((employee)=> {
-                    console.table(employee.rows);
+                db.viewAllDepartments().then(({rows})=> {
+                    //take rows back from viewALLEmployee, loops and creates an array of the id, last and first name
+                    const departments = rows.map(({department_id, department_name})=>({
+                        //setting name and value of the choices
+                        name: `${department_name}`,
+                        value: department_id
+                    }));
+                    //prompt for user to pick a choice from the managers listed
+                    prompt([
+                        {type: 'list',
+                         name: 'department',
+                         message: "Where is the department?",
+                         choices: departments
+                    }
+                    //Loop through employee arrays of managers, setting up the prompt
+                    ]).then((res)=>{
+                        //id of manager
+                        db.viewEmployeeDepartment(res.department)
+                        .then(({rows})=>{
+                        console.table(rows)           
+                        })
+                    })
                 })
                 break;
             
