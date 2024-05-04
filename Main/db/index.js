@@ -29,31 +29,31 @@ class DB {
 
     viewAllDepartments() {
         return this.query(
-            "SELECT * FROM departments"
+            "SELECT * FROM departments;"
         )
     }
 
     viewAllRoles() {
         return this.query(
-            "SELECT * FROM role"
+            "SELECT * FROM role;"
         )
     }
 
     viewAllEmployees() {
         return this.query(
-            "SELECT * FROM employee"
+            "SELECT * FROM employees;"
         )
     }
 
     addDepartment() {
         return this.query(
-            "INSERT INTO departments (department)"
+            "INSERT INTO department (department_name)"
         )
     }
     
     addRole() {
         return this.query(
-            "INSERT INTO role (role_id,) VALUES ('Manager');"
+            "INSERT INTO roles (role_id,) VALUES ('Manager');"
         )
         
     }

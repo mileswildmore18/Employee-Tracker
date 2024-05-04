@@ -1,27 +1,27 @@
 --Add multiple names in the table of employee names and inserting data into employees
-INSERT INTO employees (employee_id, first_name, last_name, role_id, department, salary manager_id ) VALUES
-(1, 'John', 'Doe', 'Sales Lead'),
-(2, 'Mike', 'Chan', 'SalesPerson'),
-(3, 'Ashley', 'Rodriguez', 'Lead Engineer'),
-(4, 'Kevin', 'Tupik', 'Software Engineer'),
-(5, 'Kunal', 'Singh', 'Account Manager'),
-(6, 'Malia','Brown', 'Acccountant'),
-(7, 'Sarah', 'Lourd', 'Legal Team Lead'),
-(8, 'Tom', 'Allen', 'Lawyer');
+INSERT INTO employees (id, first_name, last_name, role_id, manager_id) VALUES
+( 1, 'John', 'Doe', 1, NULL),
+( 2, 'Mike', 'Chan', 2, 1),
+( 3, 'Ashley', 'Rodriguez', 3, NULL),
+( 4, 'Kevin', 'Tupik', 4, 3),
+( 5, 'Kunal', 'Singh', 5, NULL),
+( 6, 'Malia','Brown', 6, 5),
+( 7, 'Sarah', 'Lourd', 7, NULL),
+( 8, 'Tom', 'Allen', 8, 7);
 
-INSERT INTO department (department_id, department_name)
+INSERT INTO department (id, name) VALUES
 (1, 'Sales'),
 (2, 'Engineering'),
 (3, 'Finance'),
 (4, 'Legal');
 
 
-INSERT INTO roles (id, role_title, salary, department)
-(1, 'Sales Lead','Sales',),
-(2, 'Salesperson', 'Sales'),
-(3, 'Lead Engineer', 'Engineering'),
-(4, 'Software Engineer', 'Engineering'),
-(5, 'Account Manager', 'Finance' ),
-(6, 'Acccountant', 'Finance' ),
-(7, 'Legal Team Lead', 'Legal'),
-(8, 'Lawyer', 'Legal' );
+INSERT INTO role (id, title, salary, department_id) VALUES
+(1, 'Sales Lead', 100000, 1),
+(2, 'Salesperson', 80000, 1),
+(3, 'Lead Engineer', 150000, 2),
+(4, 'Software Engineer', 120000, 2),
+(5, 'Account Manager', 160000, 3),
+(6, 'Acccountant', 125000, 3),
+(7, 'Legal Team Lead', 250000, 4),
+(8, 'Lawyer', 190000, 4);
