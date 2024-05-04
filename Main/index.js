@@ -37,24 +37,32 @@ function loadMainPrompts() {
                 console.table(employees.rows);
                 })
                 
-            break;    
-            // case 'Add Employee':
-            //     userChoice =  db.addEmployee()
-                
-            // case 'Update Employee Role':
-            //     userChoice =  db.updateEmployeeRole()
-               
+            break; 
+
             case 'View All Roles':
                 db.viewAllRoles().then((role)=> {
                     console.table(role.rows);
                 })
                 break;
+
+            case 'View All Departments':
+                db.viewAllDepartments().then((department)=> {
+                    console.table(department.rows);
+                })
+                break;
+                
+                // case 'Add Employee':
+            //     userChoice =  db.addEmployee()
+                
+            // case 'Update Employee Role':
+            //     userChoice =  db.updateEmployeeRole()
+               
+            
                
             // case 'Add Role':
             //     userChoice =  db.addRole()
                
-            // case 'View All Departments':
-            //     userChoice =  db.viewAllDepartments()
+            
               
             // case 'Add Department':
             //     userChoice =  db.addDepartment()

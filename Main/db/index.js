@@ -29,7 +29,7 @@ class DB {
 
     viewAllDepartments() {
         return this.query(
-            "SELECT * FROM departments;"
+            "SELECT * FROM department;"
         )
     }
 
