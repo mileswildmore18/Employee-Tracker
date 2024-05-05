@@ -66,13 +66,13 @@ class DB {
 
     updateEmployeeRole(update, role) {
         return this.query(
-            "UPDATE role SET name = $1 WHERE id = $2;"[update, role]
+            "UPDATE employees SET role_id = $2 WHERE id = $1;",[update, role]
         )
     }
 
     updateEmployeeManager(employee, manager) {
         return this.query(
-            "UPDATE manager_id SET name = $1 WHERE id = $2;"[employee, manager]
+            "UPDATE employees SET manager_id = $2 WHERE id = $1;",[employee, manager]
         )
     }
 //views the managers for each employee

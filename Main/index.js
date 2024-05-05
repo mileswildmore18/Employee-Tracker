@@ -112,6 +112,7 @@ function loadMainPrompts() {
                 break;
 
             case 'Add Employee':
+                //Adding Employees based on the roles they ar chosen to do
                 db.viewAllRoles().then(({ rows }) => {
                     const roles = rows.map(({ id, title}) => ({
                         name: `${title}`,
@@ -161,6 +162,7 @@ function loadMainPrompts() {
                 
                 break;
             case 'Add Role':
+                //Adding roles to the department they are connected to
                 db.viewAllDepartments().then(({ rows }) => {
                     const departments = rows.map(({department_id, department_name}) => ({
                         name: `${department_name}`,
@@ -197,6 +199,7 @@ function loadMainPrompts() {
                 break;
 
             case 'Add Department':
+                //Adding new departments to the database
                 db.viewAllDepartments().then(({ rows }) => {
                     const departments = rows.map(({department_id, department_name}) => ({
                         name: `${department_name}`,
@@ -227,6 +230,18 @@ function loadMainPrompts() {
                 })
                 break;
             case 'Update Employee Role':
+                //updating employee roles to another role
+                db.viewAllEmployees().then(({ rows }) => {
+                    const employees = rows.map(({id, first_name, last_name}) => ({
+                         name: `${first_name} ${last_name}`,
+                         value: id
+                     }))
+                db.viewAllRoles().then(({rows}) => {
+                    const roles = rows.map(({id, title }) => ({
+                        name: `${title}`,
+                        value: id
+                    }))
+                    
                 prompt([
                     {
                         type: 'list',
@@ -235,10 +250,10 @@ function loadMainPrompts() {
                         choices: employees
                     },
                     {
-                        type: 'input',
+                        type: 'list',
                         name: 'role',
                         message: "Which role do you want to assign the selected employee?",
-                        choices: department
+                        choices: roles
                     },
 
                 ])
@@ -250,34 +265,50 @@ function loadMainPrompts() {
                             })
 
                     })
+                })
+            })
                 break;
 
 
 
             case 'Update Employee Manager':
+                db.viewAllEmployees().then(({ rows }) => {
+                    const employees = rows.map(({id, first_name, last_name}) => ({
+                         name: `${first_name} ${last_name}`,
+                         value: id
+                     }))
+                db.viewAllEmployees().then(({rows}) => {
+                    const managers = rows.map(({ id, first_name, last_name }) => ({
+                        //setting name and value of the choices
+                        name: `${first_name} ${last_name}`,
+                        value: id
+                    }));
+                    
                 prompt([
                     {
                         type: 'list',
-                        name: 'employee',
-                        message: "Who do you want to update?",
+                        name: 'update',
+                        message: "Which employee do you want to update?",
                         choices: employees
                     },
                     {
                         type: 'list',
-                        name: 'manager',
-                        message: "Which manager do want the employee to be assigned to?",
+                        name: 'role',
+                        message: "Which manager do you want to assign the employee to?",
                         choices: managers
-                    }
+                    },
 
                 ])
                     .then((res) => {
-                        let { employee, manager } = res;
-                        db.updateEmployeeManager(employee, manager)
+                        let { update, role } = res;
+                        db.updateEmployeeRole(update, role)
                             .then(() => {
-                                console.log(`Updated ${res.employee} to work for ${res.manager}`);
+                                console.log(`Updated employee's role`);
                             })
 
                     })
+                })
+            })
                 break;
 
             case 'Remove Employee':
