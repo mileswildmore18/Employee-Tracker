@@ -35,6 +35,8 @@ function loadMainPrompts() {
             case 'View All Employees':
                 db.viewAllEmployees().then((employees) => {
                     console.table(employees.rows);
+                }).then(() => {
+                    loadMainPrompts();
                 })
 
                 break;
@@ -42,12 +44,16 @@ function loadMainPrompts() {
             case 'View All Roles':
                 db.viewAllRoles().then((role) => {
                     console.table(role.rows);
+                }).then(() => {
+                    loadMainPrompts();
                 })
                 break;
 
             case 'View All Departments':
                 db.viewAllDepartments().then((department) => {
                     console.table(department.rows);
+                }).then(() => {
+                    loadMainPrompts();
                 })
                 break;
             // Pull up the employee manager with choices of people in the company
@@ -72,11 +78,13 @@ function loadMainPrompts() {
                         //id of manager
                         db.viewEmployeeManager(res.manager)
                             .then(({ rows }) => {
-                                if (rows.length == 0){
+                                if (rows.length == 0) {
                                     console.log('No employees')
                                 } else {
-                                console.table(rows)
+                                    console.table(rows)
                                 }
+                            }).then(() => {
+                                loadMainPrompts();
                             })
                     })
                 })
@@ -104,6 +112,8 @@ function loadMainPrompts() {
                         db.viewEmployeeDepartment(res.department)
                             .then(({ rows }) => {
                                 console.table(rows)
+                            }).then(() => {
+                                loadMainPrompts();
                             })
                     })
                 })
@@ -112,6 +122,8 @@ function loadMainPrompts() {
             case 'View Budget':
                 db.viewBudget().then(({ rows }) => {
                     console.table(rows)
+                }).then(() => {
+                    loadMainPrompts();
                 })
                 break;
 
@@ -156,6 +168,8 @@ function loadMainPrompts() {
                                 db.addEmployee(firstname, lastname, role, manager)
                                     .then(() => {
                                         console.log('Employee has been added');
+                                    }).then(() => {
+                                        loadMainPrompts();
                                     })
 
                             })
@@ -196,6 +210,8 @@ function loadMainPrompts() {
                             db.addRole(role, salary, department)
                                 .then(() => {
                                     console.log(`Added role to the database`);
+                                }).then(() => {
+                                    loadMainPrompts();
                                 })
 
                         })
@@ -228,6 +244,8 @@ function loadMainPrompts() {
                             db.addDepartment(department, department_id)
                                 .then(() => {
                                     console.log(`Added the department to the database`);
+                                }).then(() => {
+                                    loadMainPrompts();
                                 })
 
                         })
@@ -268,6 +286,8 @@ function loadMainPrompts() {
                                 db.updateEmployeeRole(update, role)
                                     .then(() => {
                                         console.log(`Updated employee's manager`);
+                                    }).then(() => {
+                                        loadMainPrompts();
                                     })
 
                             })
@@ -310,6 +330,8 @@ function loadMainPrompts() {
                                 db.updateEmployeeRole(update, role)
                                     .then(() => {
                                         console.log(`Updated employee's role`);
+                                    }).then(() => {
+                                        loadMainPrompts();
                                     })
 
                             })
@@ -337,6 +359,8 @@ function loadMainPrompts() {
                             db.removeEmployees(employee)
                                 .then(() => {
                                     console.log(`Employee is no longer with the tracker`);
+                                }).then(() => {
+                                    loadMainPrompts();
                                 })
 
                         })
@@ -364,6 +388,8 @@ function loadMainPrompts() {
                             db.removeRole(role)
                                 .then(() => {
                                     console.log(`Removed the role from the tracker`);
+                                }).then(() => {
+                                    loadMainPrompts();
                                 })
 
                         })
@@ -391,6 +417,8 @@ function loadMainPrompts() {
                             db.removeDepartment(department)
                                 .then(() => {
                                     console.log(`Removed the department from the tracker`);
+                                }).then(() => {
+                                    loadMainPrompts();
                                 })
 
                         })
@@ -400,17 +428,17 @@ function loadMainPrompts() {
             case 'Quit':
                 quit();
                 break;
-                
-                
+
+
         }
 
     })
 
 
 }
-function quit(){
+function quit() {
     console.log("Goodbye!");
-                process.exit();
+    process.exit();
 }
 
 
