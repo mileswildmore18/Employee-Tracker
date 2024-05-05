@@ -1,5 +1,7 @@
 # Employee-Tracker
 
+![alt text](<./Images/Employee Tracker screenshot.png>)
+
 ## Description
 Welcome to the Employee Tracker, where you can look into the backend of the database and explore the employees featured in specific fields with their own ids, their managers, salary based on the department they are in, their role ids based on their job, and exploring deep into the the database where you can add and remove employees based on your choice if you were the boss of your company. I learned about how to add SQLs and adding functions to specific tasks of inserting databases and tables to its locations. Another thing I learned was how to communicate to the database from a server to bring in data to show users the information that is stored for them to see. I learned that you can add or delete employees, roles and departments in the tracker along with also updated employees to be with other managers and update managers included within the database. When you choose various options, you will be prompted to choose an option from the list, and some will prompt you for information to add into the database. Enjoy browsing through the Employee Tracker!
 
