@@ -45,34 +45,34 @@ class DB {
         )
     }
 
-    addDepartment() {
+    addDepartment(department_name) {
         return this.query(
-            "INSERT INTO department (department_name)"
+            "INSERT INTO department (department_name)",[department_name]
         )
     }
     
-    addRole() {
+    addRole(role, salary, department_id) {
         return this.query(
-            "INSERT INTO roles (role_id,) VALUES ('Manager');"
+            "INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3);",[role, salary, department_id]
         )
         
     }
 
     addEmployee(first_name, last_name, role_id, manager_id) {
         return this.query(
-            "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4);", [first_name, last_name, role_id, manager_id]
+            "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4);",[first_name, last_name, role_id, manager_id]
         );
     }
 
-    updateEmployeeRole() {
+    updateEmployeeRole(update, role) {
         return this.query(
-            "UPDATE role SET name =[name] WHERE id = [number];"
+            "UPDATE role SET name = $1 WHERE id = $2;"[update, role]
         )
     }
 
-    updateEmployeeManager() {
+    updateEmployeeManager(employee, manager) {
         return this.query(
-            "UPDATE manager_id SET name =[name] WHERE id = [number];"
+            "UPDATE manager_id SET name = $1 WHERE id = $2;"[employee, manager]
         )
     }
 //views the managers for each employee
@@ -88,15 +88,15 @@ class DB {
         )
     }
 
-    removeEmployees() {
+    removeEmployees(employee) {
         return this.query(
-            "DELETE FROM employees WHERE id =[number];"
+            "DELETE FROM employees WHERE id = $1;"[employee]
         )
     }
 
     removeRole() {
         return this.query(
-            "DELETE FROM role WHERE id =[number];"
+            "DELETE FROM role WHERE id = $1;"
         )
     }    
 
