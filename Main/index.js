@@ -103,8 +103,11 @@ function loadMainPrompts() {
                 })
                 break;
             
-            // case 'View Budget':
-            //     userChoice =  db.viewBudget()    
+            case 'View Budget':
+                db.viewBudget().then(({rows})=> {
+                    console.table(rows)   
+                })
+                break;    
             
             case 'Add Employee':
                 

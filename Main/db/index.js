@@ -26,19 +26,19 @@ class DB {
     }
 
 
-
+//displays all departments
     viewAllDepartments() {
         return this.query(
             "SELECT * FROM department;"
         )
     }
-
+//displays all roles
     viewAllRoles() {
         return this.query(
             "SELECT * FROM role;"
         )
     }
-
+//displays all employees
     viewAllEmployees() {
         return this.query(
             "SELECT * FROM employees;"
@@ -75,13 +75,13 @@ class DB {
             "UPDATE manager_id SET name =[name] WHERE id = [number];"
         )
     }
-
+//views the managers for each employee
     viewEmployeeManager(manager_id) {
         return this.query(
             "SELECT first_name, last_name, manager_id FROM employees WHERE manager_id = $1;",[manager_id]
         )
     }
-
+//views the departments for each employee
     viewEmployeeDepartment(department_id) {
         return this.query(
             "SELECT first_name, last_name, department_name FROM employees JOIN role ON employees.id = role.id JOIN department ON role.department_id = department.department_id WHERE department.department_id = $1;",[department_id]
@@ -105,10 +105,10 @@ class DB {
             "DELETE FROM departments WHERE id =[number];"
         )
     }
-
+//views the total budget in each department
     viewBudget() {
         return this.query(
-            "SELECT category, SUM(amount) AS total_budget FROM budget_entries GROUP BY category;"
+            "SELECT department.department_id, department.department_name, SUM(role.salary) AS utilized_budget FROM employees JOIN role ON employees.role_id = role.id JOIN department on role.department_id = department.department_id GROUP BY department.department_id, department.department_name;"
         )
     }
 
