@@ -47,7 +47,7 @@ class DB {
 
     addDepartment(department_name) {
         return this.query(
-            "INSERT INTO department (department_name)",[department_name]
+            "INSERT INTO department (department_name) VALUES ($1);",[department_name]
         )
     }
     
