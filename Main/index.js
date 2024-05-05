@@ -6,7 +6,6 @@ const trackerChoices = ['View All Employees', 'View All Roles', 'View All Depart
     'Update Employee Role', 'Update Employee Manager',
     'Remove Employee', 'Remove Role', 'Remove Department',
     'Quit']
-const role = ['Sales Lead', 'Salesperson', 'Lead Engineer', 'Software Engineer', 'Account Manager', 'Acccountant', 'Legal Team Lead', 'Lawyer', 'Customer Service',]
 
 init();
 
@@ -17,7 +16,6 @@ function init() {
     console.log(logoText);
 
     loadMainPrompts();
-
 }
 //Loads up the prompt for options
 function loadMainPrompts() {
@@ -171,12 +169,9 @@ function loadMainPrompts() {
                                     }).then(() => {
                                         loadMainPrompts();
                                     })
-
                             })
-
                     })
                 })
-
 
                 break;
             case 'Add Role':
@@ -203,7 +198,6 @@ function loadMainPrompts() {
                             message: "Which department does the role belong to?",
                             choices: departments,
                         }
-
                     ])
                         .then((res) => {
                             let { role, salary, department } = res;
@@ -213,7 +207,6 @@ function loadMainPrompts() {
                                 }).then(() => {
                                     loadMainPrompts();
                                 })
-
                         })
                 })
                 break;
@@ -247,11 +240,9 @@ function loadMainPrompts() {
                                 }).then(() => {
                                     loadMainPrompts();
                                 })
-
                         })
                 })
                 break;
-
 
             case 'Update Employee Role':
                 //updating employee roles to another role
@@ -279,7 +270,6 @@ function loadMainPrompts() {
                                 message: "Which role do you want to assign the selected employee?",
                                 choices: roles
                             },
-
                         ])
                             .then((res) => {
                                 let { update, role } = res;
@@ -289,7 +279,6 @@ function loadMainPrompts() {
                                     }).then(() => {
                                         loadMainPrompts();
                                     })
-
                             })
                     })
                 })
@@ -323,7 +312,6 @@ function loadMainPrompts() {
                                 message: "Which manager do you want to assign the employee to?",
                                 choices: managers
                             },
-
                         ])
                             .then((res) => {
                                 let { update, role } = res;
@@ -333,7 +321,6 @@ function loadMainPrompts() {
                                     }).then(() => {
                                         loadMainPrompts();
                                     })
-
                             })
                     })
                 })
@@ -352,7 +339,6 @@ function loadMainPrompts() {
                             message: "Who do you want to remove?",
                             choices: employees
                         },
-
                     ])
                         .then((res) => {
                             let { employee } = res;
@@ -362,7 +348,6 @@ function loadMainPrompts() {
                                 }).then(() => {
                                     loadMainPrompts();
                                 })
-
                         })
                 })
                 break;
@@ -381,7 +366,6 @@ function loadMainPrompts() {
                             message: "Which role do you want to remove?",
                             choices: roles
                         },
-
                     ])
                         .then((res) => {
                             let { role } = res;
@@ -391,7 +375,6 @@ function loadMainPrompts() {
                                 }).then(() => {
                                     loadMainPrompts();
                                 })
-
                         })
                 })
                 break;
@@ -410,7 +393,6 @@ function loadMainPrompts() {
                             message: "Which department do you want to remove?",
                             choices: departments
                         },
-
                     ])
                         .then((res) => {
                             let { department } = res;
@@ -420,105 +402,17 @@ function loadMainPrompts() {
                                 }).then(() => {
                                     loadMainPrompts();
                                 })
-
                         })
                 })
                 break;
-
+            //Calls to exit the application
             case 'Quit':
                 quit();
                 break;
-
-
         }
-
-    })
-
-
-}
-function quit() {
-    console.log("Goodbye!");
-    process.exit();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-function mapEmployees() {
-    let managers;
-    db.viewAllEmployees().then(({ rows }) => {
-        managers = rows.map(({ id, first_name, last_name }) => ({
-            name: `${first_name} ${last_name}`,
-            value: id
-        })).then(() => {
-
-        })
     })
 }
-
-function viewEmployeeDepartment() {
-
-}
-
-function viewEmployeeManager() {
-
-}
-
-function removeEmployees() {
-
-}
-
-function updateEmployeeRole() {
-
-}
-
-function updateEmployeeManager() {
-
-}
-
-function viewAllRoles() {
-
-}
-
-function addRole() {
-
-}
-
-function removeRole() {
-
-}
-
-function viewAllDepartments() {
-
-}
-
-function addDepartment() {
-
-}
-
-function removeDepartment() {
-
-}
-
-function viewBudget() {
-
-}
-
-function addEmployee() {
-
-
-}
-
-//Exit the Application
+//Exit the application
 function quit() {
     console.log("Goodbye!");
     process.exit();
