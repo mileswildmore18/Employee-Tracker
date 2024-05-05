@@ -44,32 +44,32 @@ class DB {
             "SELECT * FROM employees;"
         )
     }
-
+//adds a new department into the tracker
     addDepartment(department_name) {
         return this.query(
             "INSERT INTO department (department_name) VALUES ($1);",[department_name]
         )
     }
-    
+    //adds a new role into the tracker
     addRole(role, salary, department_id) {
         return this.query(
             "INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3);",[role, salary, department_id]
         )
         
     }
-
+//adds a new employee into the tracker
     addEmployee(first_name, last_name, role_id, manager_id) {
         return this.query(
             "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4);",[first_name, last_name, role_id, manager_id]
         );
     }
-
+//updates the employee's role to another
     updateEmployeeRole(update, role) {
         return this.query(
             "UPDATE employees SET role_id = $2 WHERE id = $1;",[update, role]
         )
     }
-
+//updates the employee to another manager
     updateEmployeeManager(employee, manager) {
         return this.query(
             "UPDATE employees SET manager_id = $2 WHERE id = $1;",[employee, manager]
@@ -87,22 +87,22 @@ class DB {
             "SELECT first_name, last_name, department_name FROM employees JOIN role ON employees.id = role.id JOIN department ON role.department_id = department.department_id WHERE department.department_id = $1;",[department_id]
         )
     }
-
+//deletes an employee from the tracker
     removeEmployees(employee) {
         return this.query(
-            "DELETE FROM employees WHERE id = $1;"[employee]
+            "DELETE FROM employees WHERE id = $1;",[employee]
         )
     }
-
-    removeRole() {
+//deletes a role from the tracker
+    removeRole(role) {
         return this.query(
-            "DELETE FROM role WHERE id = $1;"
+            "DELETE FROM role WHERE id = $1;",[role]
         )
     }    
-
-    removeDepartment() {
+//deletes a department from the tracker
+    removeDepartment(department) {
         return this.query(
-            "DELETE FROM departments WHERE id =[number];"
+            "DELETE FROM department WHERE department_id =$1;",[department]
         )
     }
 //views the total budget in each department
