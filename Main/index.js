@@ -72,7 +72,11 @@ function loadMainPrompts() {
                         //id of manager
                         db.viewEmployeeManager(res.manager)
                             .then(({ rows }) => {
+                                if (rows.length == 0){
+                                    console.log('No employees')
+                                } else {
                                 console.table(rows)
+                                }
                             })
                     })
                 })
@@ -312,7 +316,7 @@ function loadMainPrompts() {
                     })
                 })
                 break;
-                //Deletes an employee from the tracker
+            //Deletes an employee from the tracker
             case 'Remove Employee':
                 db.viewAllEmployees().then(({ rows }) => {
                     const employees = rows.map(({ id, first_name, last_name }) => ({
@@ -339,7 +343,7 @@ function loadMainPrompts() {
                 })
                 break;
 
-                //Deletes a role from the tracker
+            //Deletes a role from the tracker
             case 'Remove Role':
                 db.viewAllRoles().then(({ rows }) => {
                     const roles = rows.map(({ id, title }) => ({
@@ -366,7 +370,7 @@ function loadMainPrompts() {
                 })
                 break;
 
-                //Deletes a department from the tracker
+            //Deletes a department from the tracker
             case 'Remove Department':
                 db.viewAllDepartments().then(({ rows }) => {
                     const departments = rows.map(({ department_id, department_name }) => ({
@@ -392,10 +396,21 @@ function loadMainPrompts() {
                         })
                 })
                 break;
+
+            case 'Quit':
+                quit();
+                break;
+                
+                
         }
 
     })
 
+
+}
+function quit(){
+    console.log("Goodbye!");
+                process.exit();
 }
 
 
@@ -404,8 +419,7 @@ function loadMainPrompts() {
 
 
 
-// case 'Quit':
-//     userChoice = quit()
+
 
 
 
