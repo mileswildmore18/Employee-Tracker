@@ -102,7 +102,7 @@ function loadMainPrompts() {
                     })
                 })
                 break;
-            
+            //Shows the total amount of the budget in each department
             case 'View Budget':
                 db.viewBudget().then(({rows})=> {
                     console.table(rows)   
