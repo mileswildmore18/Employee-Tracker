@@ -19,7 +19,7 @@ https://drive.google.com/file/d/1_4dNTVMluZxtYpKUIWr6tlby93L-B17k/view
  * [Resources](#resources)
 
 ## Installation
-You will need these npm (Node Package Manager) along with the uuid in order to use the Note Taker with these commands:
+You will need these npm (Node Package Manager) along with the uuid in order to use the Employee Tracker with these commands:
 ```
 npm install
 npm install inquirer@8.2.4
